@@ -15,8 +15,8 @@ Feature: Methods
 
     Examples: 
       | email     | userName       | password    | signUp | status  |
-  		| noEmail   | newUserName       | "word"   | signUp | failNoEmail |
-      | email    | userName       | "word"       | signUp | success |
+  		| noEmail   | newUserName    | "word"   | signUp | failNoEmail |
+      | email     | userName       | "word"       | signUp | success |
       | email     | longUserName   | "word"      | signUp | failLong |
       | email     | usedUserName   | "word"      | signUp | failUsed |
       

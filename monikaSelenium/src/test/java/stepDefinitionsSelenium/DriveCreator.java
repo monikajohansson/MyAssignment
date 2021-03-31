@@ -13,7 +13,7 @@ public class DriveCreator {
 		if (browser.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver(); // starta chrome
-		} else if(browser.equals("firefox")) {
+		} else if (browser.equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver", "C:\\Program Files (x86)\\drivers\\geckodriver.exe");
 			driver = new FirefoxDriver(); // starta firefox
 		} else {

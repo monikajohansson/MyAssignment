@@ -142,7 +142,8 @@ public class stepDefinitionsSelenium {
 	private void sendLong(By by) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 
-		driver.findElement(by).sendKeys("11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+		driver.findElement(by).sendKeys(
+				"11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
 
 	}
 
