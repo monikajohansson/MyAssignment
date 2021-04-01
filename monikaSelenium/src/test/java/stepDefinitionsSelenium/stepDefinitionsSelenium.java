@@ -44,32 +44,32 @@ public class stepDefinitionsSelenium {
 		sendNoEmail(By.id("email"));
 	}
 	//Sends a username
-	@When("I enter a userName")
+	@And("I enter a userName")
 	public void enterUserName() {
 		sendUserName(By.id("new_username"));
 	}
 	//Sends a username longer than 100 characters
-	@When("I enter a longUserName")
+	@And("I enter a longUserName")
 	public void longUserName() {
 		sendLong(By.id("new_username"));
 	}
 	//Sends an existing username
-	@When("I enter a usedUserName")
+	@And("I enter a usedUserName")
 	public void usedUserName() {
 		sendUsedUserName(By.id("new_username"));
 	}
 	//Sends a username when no email is inserted
-	@When("I enter a newUserName")
+	@And("I enter a newUserName")
 	public void noEmailUser() {
 		newUserName(By.id("new_username"));
 	}
 	
-	@And("I enter a password {string}")
-	public void enterPassword(String password) {
+	@And("I enter a password")
+	public void enterPassword() {
 		sendPassword(By.id("new_password"));
 	}
 
-	@And("I press signUp")
+	@When("I press signUp")
 	public void pressSignUp() {
 		click(By.id("create-account"));
 	}
