@@ -128,8 +128,11 @@ public class stepDefinitionsSelenium {
 	//Sends a username that is over 100 characters
 	private void sendLong(By by) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		driver.findElement(by).sendKeys(
-				"11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+		String longUserName = "";
+		for(int i = 0; i<102; i++) {
+			longUserName = longUserName.concat("1");					
+		}
+		driver.findElement(by).sendKeys(longUserName);
 	}
     //Sends an existing username
 	private void sendUsedUserName(By by) {
