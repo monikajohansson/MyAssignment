@@ -125,7 +125,7 @@ public class stepDefinitionsSelenium {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 		driver.findElement(by).sendKeys(emailString);
 	}
-	//Sends a username that is over 100 characters
+	//Creates and sends a username that is over 100 characters
 	private void sendLong(By by) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 		String longUserName = "";
