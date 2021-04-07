@@ -111,8 +111,8 @@ public class stepDefinitionsSelenium {
 	private void sendEmail(By by) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 		rand = new Random();
-		int randomInt = rand.nextInt(1000000);
-		emailString = "username" + randomInt + "@yahoo.com";
+		int randomInt = rand.nextInt(3000000);
+		emailString = "thisIsAnEmail" + randomInt + "@yahoo.com";
 		driver.findElement(by).sendKeys(emailString);
 	}
 	//Sends an empty String as email
