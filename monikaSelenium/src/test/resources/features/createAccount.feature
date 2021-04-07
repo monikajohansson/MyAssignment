@@ -10,14 +10,14 @@ Feature: Methods
     And I have entered <email>
     And I enter a <userName>
     And I enter a password 
-    When I press <signUp>
+    When I press signUp
     Then I verify the <status> in step
 
     Examples: 
-      | email     | userName        | signUp | status      |
-      | email     | userName        | signUp | success     |
-      | email     | longUserName    | signUp | failLong    |
-      | email     | usedUserName    | signUp | failUsed    |
-  		| noEmail   | newUserName     | signUp | failNoEmail |
+      | email     | userName        | status      |
+      | email     | userName        | success     |
+      | email     | longUserName    | failLong    |
+      | email     | usedUserName    | failUsed    |
+  		| noEmail   | newUserName     | failNoEmail |
       
  

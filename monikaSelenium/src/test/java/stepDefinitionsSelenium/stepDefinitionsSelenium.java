@@ -150,7 +150,7 @@ public class stepDefinitionsSelenium {
 	//Sends a password
 	private void sendPassword(By by) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		password = "ThisIs@Password1";
+		password = "ThisIs@Password1"; 
 		driver.findElement(by).sendKeys(password);
 	}
 
