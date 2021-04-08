@@ -3,7 +3,6 @@ package stepDefinitionsSelenium;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +20,6 @@ public class stepDefinitionsSelenium {
 	private WebDriver driver;
 	private Random rand;
 	private String emailString;
-	private String noEmailString;
 
 	@Given("I am directed to MailChimp")
 	public void browser() {
@@ -35,7 +33,10 @@ public class stepDefinitionsSelenium {
 	// Sends a correct Email
 	@And("I have entered email")
 	public void enterEmail() {
-		sendEmail(By.id("email"));
+		rand = new Random();
+		int randomInt = rand.nextInt(3000000);
+		emailString = "thisIsAnEmail" + randomInt + "@yahoo.com";
+		sendKeys(By.id("email"), emailString);
 	}
 
 	// Sends no Email
@@ -60,10 +61,12 @@ public class stepDefinitionsSelenium {
 		sendKeys(By.id("new_username"), "dragon");
 	}
 
-	// Sends a username when no email is inserted
-	@And("I enter a newUserName")
+	@And("I enter a userName")
 	public void noEmailUser() {
-		newUserName(By.id("new_username"));
+		rand = new Random();
+		int randomInt = rand.nextInt(1000000);
+		emailString = "email" + randomInt + "@yahoo.com";
+		sendKeys(By.id("new_username"), emailString);
 	}
 
 	@And("I enter a password")
@@ -75,37 +78,24 @@ public class stepDefinitionsSelenium {
 	public void pressSignUp() {
 		click(By.id("create-account"));
 	}
-	// Verifies that no email has been inserted
 
-	// Verifies that the account is created successfully
-	@Then("I verify the success in step")
-	public void verifySuccess() {
-		WebElement emailSent = driver.findElement(By.cssSelector("h1[class*=margin-bottom--lv3]"));
-		assertEquals("Check your email", emailSent.getText());
-		driver.quit();
-	}
+	@Then("I verify the {string} in step")
+	public void verifyStatus(String status) {
 
-	// Verifies that the username cannot be more than 100 characters
-	@Then("I verify the failLong in step")
-	public void verifyFailLong() {
-		WebElement sentLong = driver.findElement(By.cssSelector("span[class=invalid-error]"));
-		assertEquals("Enter a value less than 100 characters long", sentLong.getText());
-		driver.quit();
-	}
-
-	// Verifies that the username already exists
-	@Then("I verify the failUsed in step")
-	public void verifyFailUsed() {
-		WebElement sentUsed = driver.findElement(By.cssSelector("span[class=invalid-error]"));
-		assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.",
-				sentUsed.getText());
-		driver.quit();
-	}
-
-	@Then("I verify the failNoEmail in step")
-	public void verifyNoEmail() {
-		WebElement sentNoEmail = driver.findElement(By.cssSelector("span[class=invalid-error]"));
-		assertEquals("Please enter a value", sentNoEmail.getText());
+		if (status.equals("success")) {
+			WebElement emailSent = driver.findElement(By.cssSelector("h1[class*=margin-bottom--lv3]"));
+			assertEquals("Check your email", emailSent.getText());
+		} else if (status.equals("failLong")) {
+			WebElement sentLong = driver.findElement(By.cssSelector("span[class=invalid-error]"));
+			assertEquals("Enter a value less than 100 characters long", sentLong.getText());
+		} else if (status.equals("failUsed")) {
+			WebElement sentUsed = driver.findElement(By.cssSelector("span[class=invalid-error]"));
+			assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.",
+					sentUsed.getText());
+		} else {
+			WebElement sentNoEmail = driver.findElement(By.cssSelector("span[class=invalid-error]"));
+			assertEquals("Please enter a value", sentNoEmail.getText());
+		}
 		driver.quit();
 	}
 
@@ -114,26 +104,9 @@ public class stepDefinitionsSelenium {
 		driver.findElement(by).click();
 	}
 
-	// Sends a random email
-	private void sendEmail(By by) {
-		rand = new Random();
-		int randomInt = rand.nextInt(3000000);
-		emailString = "thisIsAnEmail" + randomInt + "@yahoo.com";
-		sendKeys(by, emailString);
-	}
-
-	// Sends an existing username
 	private void sendKeys(By by, String keys) {
 		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(by));
 		driver.findElement(by).sendKeys(keys);
-	}
-
-	// Sends a username when no email is inserted
-	private void newUserName(By by) {
-		rand = new Random();
-		int randomInt = rand.nextInt(1000000);
-		noEmailString = "noemail" + randomInt + "@yahoo.com";
-		sendKeys(by, noEmailString);
 	}
 
 }

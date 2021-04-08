@@ -13,10 +13,10 @@ Feature: Methods
     Then I verify the <status> in step
 
     Examples: 
-      | email     | userName        | status      |
-      | email     | newUserName        | success     |
-      | email     | longUserName    | failLong    |
-      | email     | usedUserName    | failUsed    |
-  		| noEmail   | newUserName     | failNoEmail |
+      | email     | userName        | status        |
+      | email     | userName     | "success"     |
+      | email     | longUserName    | "failLong"    |
+      | email     | usedUserName    | "failUsed"    |
+  		| noEmail   | userName     | "failNoEmail" |
       
  
