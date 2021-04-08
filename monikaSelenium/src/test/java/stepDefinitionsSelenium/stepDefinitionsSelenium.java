@@ -39,7 +39,7 @@ public class stepDefinitionsSelenium {
 		sendKeys(By.id("email"), emailString);
 	}
 
-	// Sends no Email
+	// Sends an empty String as Email
 	@And("I have entered noEmail")
 	public void noEmail() {
 		sendKeys(By.id("email"), "");
