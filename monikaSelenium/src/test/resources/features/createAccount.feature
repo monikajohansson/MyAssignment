@@ -2,7 +2,6 @@
 Feature: Methods
   I want to use this template to create accounts.
 
-  @tag2
   Scenario Outline: Create an account
 
 		
