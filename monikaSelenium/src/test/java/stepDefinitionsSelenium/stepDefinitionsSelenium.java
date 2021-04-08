@@ -21,7 +21,6 @@ public class stepDefinitionsSelenium {
 	private WebDriver driver;
 	private Random rand;
 	private String emailString;
-	private String password;
 	private String noEmailString;
 
 	@Given("I am directed to MailChimp")
@@ -29,7 +28,6 @@ public class stepDefinitionsSelenium {
 		DriveCreator creator = new DriveCreator();
 		driver = creator.createBrowser("chrome");
 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("https://login.mailchimp.com/signup/");
 		driver.manage().window().maximize();
 	}
@@ -43,25 +41,23 @@ public class stepDefinitionsSelenium {
 	// Sends no Email
 	@And("I have entered noEmail")
 	public void noEmail() {
-		sendNoEmail(By.id("email"));
-	}
-
-	// Sends a username
-	@And("I enter a userName")
-	public void enterUserName() {
-		sendUserName(By.id("new_username"));
+		sendKeys(By.id("email"), "");
 	}
 
 	// Sends a username longer than 100 characters
 	@And("I enter a longUserName")
 	public void longUserName() {
-		sendLong(By.id("new_username"));
+		String longUserName = "";
+		for (int i = 0; i < 102; i++) {
+			longUserName = longUserName.concat("1");
+		}
+		sendKeys(By.id("new_username"), longUserName);
 	}
 
 	// Sends an existing username
 	@And("I enter a usedUserName")
 	public void usedUserName() {
-		sendUsedUserName(By.id("new_username"));
+		sendKeys(By.id("new_username"), "dragon");
 	}
 
 	// Sends a username when no email is inserted
@@ -72,7 +68,7 @@ public class stepDefinitionsSelenium {
 
 	@And("I enter a password")
 	public void enterPassword() {
-		sendPassword(By.id("new_password"));
+		sendKeys(By.id("new_password"), "ThisIs@Password1");
 	}
 
 	@When("I press signUp")
@@ -120,55 +116,24 @@ public class stepDefinitionsSelenium {
 
 	// Sends a random email
 	private void sendEmail(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 		rand = new Random();
 		int randomInt = rand.nextInt(3000000);
 		emailString = "thisIsAnEmail" + randomInt + "@yahoo.com";
-		driver.findElement(by).sendKeys(emailString);
-	}
-
-	// Sends an empty String as email
-	private void sendNoEmail(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		driver.findElement(by).sendKeys("");
-	}
-
-	// Uses the random email as username
-	private void sendUserName(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		driver.findElement(by).sendKeys(emailString);
-	}
-
-	// Creates and sends a username that is over 100 characters
-	private void sendLong(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		String longUserName = "";
-		for (int i = 0; i < 102; i++) {
-			longUserName = longUserName.concat("1");
-		}
-		driver.findElement(by).sendKeys(longUserName);
+		sendKeys(by, emailString);
 	}
 
 	// Sends an existing username
-	private void sendUsedUserName(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		driver.findElement(by).sendKeys("dragon");
+	private void sendKeys(By by, String keys) {
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(by));
+		driver.findElement(by).sendKeys(keys);
 	}
 
 	// Sends a username when no email is inserted
 	private void newUserName(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
 		rand = new Random();
 		int randomInt = rand.nextInt(1000000);
 		noEmailString = "noemail" + randomInt + "@yahoo.com";
-		driver.findElement(by).sendKeys(noEmailString);
-	}
-
-	// Sends a password
-	private void sendPassword(By by) {
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(by));
-		password = "ThisIs@Password1";
-		driver.findElement(by).sendKeys(password);
+		sendKeys(by, noEmailString);
 	}
 
 }
