@@ -14,9 +14,9 @@ Feature: Methods
 
     Examples: 
       | email     | userName        | status        |
-      | email     | userName     | "success"     |
+      | email     | userName        | "success"     |
       | email     | longUserName    | "failLong"    |
       | email     | usedUserName    | "failUsed"    |
-  		| noEmail   | userName     | "failNoEmail" |
+  		| noEmail   | userName        | "failNoEmail" |
       
  

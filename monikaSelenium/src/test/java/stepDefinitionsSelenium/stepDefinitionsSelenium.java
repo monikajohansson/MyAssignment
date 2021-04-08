@@ -45,6 +45,14 @@ public class stepDefinitionsSelenium {
 		sendKeys(By.id("email"), "");
 	}
 
+	@And("I enter a userName")
+	public void username() {
+		rand = new Random();
+		int randomInt = rand.nextInt(1000000);
+		emailString = "email" + randomInt + "@yahoo.com";
+		sendKeys(By.id("new_username"), emailString);
+	}
+
 	// Sends a username longer than 100 characters
 	@And("I enter a longUserName")
 	public void longUserName() {
@@ -59,14 +67,6 @@ public class stepDefinitionsSelenium {
 	@And("I enter a usedUserName")
 	public void usedUserName() {
 		sendKeys(By.id("new_username"), "dragon");
-	}
-
-	@And("I enter a userName")
-	public void noEmailUser() {
-		rand = new Random();
-		int randomInt = rand.nextInt(1000000);
-		emailString = "email" + randomInt + "@yahoo.com";
-		sendKeys(By.id("new_username"), emailString);
 	}
 
 	@And("I enter a password")
